@@ -3,7 +3,8 @@
 namespace Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Entity\UserGroup;
 /**
  * User
  *
@@ -48,6 +49,13 @@ class User
      * @ORM\Column(name="password", type="string", nullable=false, unique=false)
      */
     private $password;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="UserGroup", mappedBy="user")
+     *
+     */
+    private $userGroups;
+    
 
     /**
      * Get id.
@@ -153,5 +161,48 @@ class User
     public function getEmail()
     {
         return $this->email;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->userGroups = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add userGroup.
+     *
+     * @param \Entity\UserGroup $userGroup
+     *
+     * @return User
+     */
+    public function addUserGroup(\Entity\UserGroup $userGroup)
+    {
+        $this->userGroups[] = $userGroup;
+
+        return $this;
+    }
+
+    /**
+     * Remove userGroup.
+     *
+     * @param \Entity\UserGroup $userGroup
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeUserGroup(\Entity\UserGroup $userGroup)
+    {
+        return $this->userGroups->removeElement($userGroup);
+    }
+
+    /**
+     * Get userGroups.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserGroups()
+    {
+        return $this->userGroups;
     }
 }

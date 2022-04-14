@@ -18,8 +18,14 @@
 
 {% block body %}
 
-<h1>Bonjour {{ username}} </h1>
-<a href="?c=user&t=closeSession"> Deconnexion</a>
-
-
+    <h1>Bonjour {{ username}} </h1>
+    <a href="?c=user&t=closeSession"> Deconnexion</a>
+    
+    <form action="?c=userGroup&t=groupDetail" method="post"> 
+        {% for group in user.getUserGroups %}
+            <button name="idGroup" value={{ group.getId }}>{{ group.getName }}</button>
+        {% endfor %}
+        <a href="?c=userGroup&t=create">Add➕ </a>
+    </form>
+     
 {% endblock %}

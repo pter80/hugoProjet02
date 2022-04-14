@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use Entity\User;
-
+use Entity\UserGroup;
 class UserController extends Controller
 
 {
@@ -22,7 +22,7 @@ class UserController extends Controller
       $username = $_POST["username"];
       $password = password_hash($_POST["password"],PASSWORD_DEFAULT);
       $genre = $_POST["genre"];
-      $email =  $_POST["genre"];
+      $email =  $_POST["email"];
       
       
       //création de l'utilisateur
@@ -45,7 +45,7 @@ class UserController extends Controller
       }
       else{
           //le user n'existe pas, je le cree
-          var_dump("création du compte");
+          //var_dump("création du compte");
           $user = new User();
           $user->setUsername($username);
           $user->setPassword($password);
@@ -53,9 +53,9 @@ class UserController extends Controller
           $user->setEmail($email);
           $em->persist($user);
 	        $em->flush();
+	        echo $this->twig->render('index.html',[]);
+	        
       }
-      
-      //creation Session....
       
       //faire la fonction de hash
       
@@ -85,18 +85,28 @@ class UserController extends Controller
 
   public function openSession($params)
   {
-    //vérifier si le compte existe
-    
-    if (isset($_SESSION['username'])) {  //Si une session existe déja
+    $em=$params["em"];
+    if (isset($_SESSION['username'])) {  //Si une session utilisateur existe déja
           $username = $_SESSION['username'];
           
-          echo $this->twig->render('userPage.twig',['username' =>$username]);
+          //recuperation des donnees de l'utilisateur (groupes...)
+          $qb=$em->createQueryBuilder(); 
+          $qb->select('u')
+            ->from('Entity\User', 'u')
+            ->where('u.username =:username')
+            ->setParameter('username', $username)
+            ->setMaxResults(1);
+          $query = $qb->getQuery();
+          $user = $query->getOneOrNullResult();
+          
+          echo $this->twig->render('userPage.twig',['username' =>$username, 'user' =>$user]);
            
     } 
+    
     else { //Sinon crée la Session
       
       //récupère les données du formulaire
-      $em=$params["em"];
+      //$em=$params["em"];
       $username = $_POST["username"];
       $password = $_POST["password"];
       
@@ -109,37 +119,33 @@ class UserController extends Controller
           ->setMaxResults(1)
         ;
         
-        $query = $qb->getQuery();
-        $user = $query->getOneOrNullResult();
-        //var_dump($user);die;
-        $alertLogin = false; //false si le username ou le mdp est correcte 
+      $query = $qb->getQuery();
+      $user = $query->getOneOrNullResult();
+      
+      //var_dump($user);die;
+      $alertLogin = false; //false si le username ou le mdp est correcte 
+    
+      if($user){  //si le user existe
+        if (password_verify($password,$user->getPassword())) {  //et si le mot de passe correspond
+          session_destroy();
         
-        if($user){  //si le user existe
-          if (password_verify($password,$user->getPassword())) {  //et si le mot de passe correspond
-            session_destroy();
-          
-            session_start(); //creation de la session
-          
-            $_SESSION["username"]=$username;
-              
-            //echo $_SESSION['username'];die;
-            
-            
-  
-            echo $this->twig->render('userPage.twig',['username' =>$username]);
-          } 
-          else {
-            $alertLogin = true;
-            echo $this->twig->render('formLogin.twig',['alertLogin' =>$alertLogin]);
-            
-          }
-        }
-        else
-        {
-          $alertLogin = true;
+          session_start(); //creation de la session
+        
+          $_SESSION["username"]=$username;
+   
+          echo $this->twig->render('userPage.twig',['username' =>$username, 'user' =>$user ]);
+        } 
+        else { //si le mdp est incorrecte
+          $alertLogin = true; 
           echo $this->twig->render('formLogin.twig',['alertLogin' =>$alertLogin]);
+          
         }
-        
+      }
+      else { //si le user n'existe pas 
+        $alertLogin = true;
+        echo $this->twig->render('formLogin.twig',['alertLogin' =>$alertLogin]);
+      }
+      
     }
     
   }
@@ -153,5 +159,23 @@ class UserController extends Controller
     echo $this->twig->render('disconnect.twig',[]);  
   }
   
+  /*
+   public function testURL()
+  {
+    $url = "https://www.lemonde.fr/rss/une.xml";
+    if (filter_var($url, FILTER_VALIDATE_URL)) { //vérifier si c'est une URL
+        if(strrchr($url, '.') == ".xml"){  //vérifier si c'est bien un XML
+  	      echo("$url is a valid URL");
+        }
+        else{
+          echo("url is not a valid URL");die;
+        }
+        
+    } else {
+        echo("$url is not a valid URL");
+    }
+    die;
+  }
+  */
   
 }

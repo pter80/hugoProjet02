@@ -1,0 +1,25 @@
+{% block stylesheet %}
+
+    <link type="text/css"  href="views/forms.css" rel="stylesheet" >
+{% endblock %}
+
+{% block script %}
+    <script src="https://kit.fontawesome.com/2a2e68ce16.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block body %}
+    
+ <div class="iconBack">
+        <a href="?c=user&t=openSession"><i class="fa-solid fa-xmark"></i></a>
+    </div>
+    <form action="?c=userGroup&t=add" method="POST">
+        <h1>CREATION GROUPE</h1>
+        <div class="formcontainer">
+            <label><span>Nom du groupe :</span></label>
+            <input type="text" placeholder="nom du groupe" name="name" required>
+            <button type="submit"><strong>Crée</strong></button>
+        </div>
+    </form>
+   
+     
+{% endblock %}
