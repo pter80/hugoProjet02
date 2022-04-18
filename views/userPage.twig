@@ -1,8 +1,3 @@
-{% block php %}
-    <?php
-        session_start();
-    ?>
-{% endblock %}
 {% extends "base.html" %}
 
 
@@ -25,7 +20,8 @@
         {% for group in user.getUserGroups %}
             <button name="idGroup" value={{ group.getId }}>{{ group.getName }}</button>
         {% endfor %}
-        <a href="?c=userGroup&t=create">Add➕ </a>
     </form>
+    <a href="?c=userGroup&t=create">Add➕ </a>
+    <a href="?c=userGroup&t=formDelete">del🗑️</a>
      
 {% endblock %}

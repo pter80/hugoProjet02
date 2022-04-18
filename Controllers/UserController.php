@@ -45,7 +45,6 @@ class UserController extends Controller
       }
       else{
           //le user n'existe pas, je le cree
-          //var_dump("création du compte");
           $user = new User();
           $user->setUsername($username);
           $user->setPassword($password);
@@ -61,19 +60,6 @@ class UserController extends Controller
       
         
       ///////////////////////////////////////////////////////////////
-      
-      //$existe = password_verify($password , $hash );
-      /*
-      $url = "https://www.lemonde.fr/rss/une.xml";
-      $rss = simplexml_load_file($url);
-      echo '<ul>';
-      foreach ($rss->channel->item as $item){
-       $datetime = date_create($item->pubDate);
-       $date = date_format($datetime, 'd M Y, H\hi');
-       echo '<li><a href="'.$item->link.'">'.utf8_decode($item->).'</a> ('.$date.')</li>'.;
-      }
-      echo '</ul>';
-      */
   }
   
   public function login(){
@@ -158,24 +144,5 @@ class UserController extends Controller
     //var_dump($_SESSION);
     echo $this->twig->render('disconnect.twig',[]);  
   }
-  
-  /*
-   public function testURL()
-  {
-    $url = "https://www.lemonde.fr/rss/une.xml";
-    if (filter_var($url, FILTER_VALIDATE_URL)) { //vérifier si c'est une URL
-        if(strrchr($url, '.') == ".xml"){  //vérifier si c'est bien un XML
-  	      echo("$url is a valid URL");
-        }
-        else{
-          echo("url is not a valid URL");die;
-        }
-        
-    } else {
-        echo("$url is not a valid URL");
-    }
-    die;
-  }
-  */
   
 }

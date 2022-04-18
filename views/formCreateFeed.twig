@@ -1,0 +1,32 @@
+{% block stylesheet %}
+
+    <link type="text/css"  href="views/forms.css" rel="stylesheet" >
+{% endblock %}
+
+{% block script %}
+    <script src="https://kit.fontawesome.com/2a2e68ce16.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block body %}
+    
+ <div class="iconBack">
+        <a href="?c=user&t=openSession"><i class="fa-solid fa-xmark"></i></a>
+    </div>
+    <form action="?c=feed&t=add" method="POST">
+        <h1>AJOUT RSS</h1>
+        <div class="icon">
+            <i class="fa-solid fa-square-rss"></i>
+        </div>
+        {% if alertURL  == true %}   <!-- Si l'URL est incorrect -->
+            <p class=alert>URL incorrect ! </p>
+        {% endif %}
+        <div class="formcontainer">
+            <label><span>Flux RSS:</span></label>
+            <input type="hidden" name="idGroup" value={{ idGroup }}>
+            <input type="url" placeholder="http://" name="url" required>
+            <button type="submit"><strong>Ajouter</strong></button>
+        </div>
+    </form>
+   
+     
+{% endblock %}

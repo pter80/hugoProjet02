@@ -44,8 +44,8 @@ class UserGroupController extends Controller
       $alertCreateGroup = false; //false si le groupe n'existe pas
       if($group){
           //le nom du groupe existe deja
-          $alertAccount = true;
-          echo $this->twig->render('formAccount.twig',['alertAccount' =>$alertAccount]);  
+          $alertCreateGroup = true;
+          echo $this->twig->render('formCreateGroup.twig',['alertCreateGroup' =>$alertCreateGroup]);  
       }
       else{
           //le nom du groupe n'existe pas, je le cree
@@ -59,6 +59,61 @@ class UserGroupController extends Controller
 	     //faire renvoyer vers la page de l'utilisateur
 	     echo $this->twig->render('userPage.twig',['username' =>$username, 'user' =>$user]);
       }
+    }
+    
+    public function formDelete($params) //renvoi au formulaire de suppression d'un groupe
+    {
+        $em=$params["em"];
+        $username = $_SESSION['username'];
+        
+         //recuperation des donnees de l'utilisateur (groupes...)
+          $qb=$em->createQueryBuilder(); 
+          $qb->select('u')
+            ->from('Entity\User', 'u')
+            ->where('u.username =:username')
+            ->setParameter('username', $username)
+            ->setMaxResults(1);
+          $query = $qb->getQuery();
+          $user = $query->getOneOrNullResult();
+          
+        
+        echo $this->twig->render('formDeleteGroup.twig', ['user'=>$user]);
+    }
+    
+    public function deleteGroup($params)  //supprime le ou les groupe(s) selectionne(s)
+    {
+        $em=$params["em"];
+        $username = $_SESSION['username'];
+        
+        foreach ($_POST as $name =>$groupId){
+            
+            //recherche par son Id le groupe dans Entity\UserGroup
+            $UserGroupRepository = $em->getRepository('Entity\UserGroup');
+            $group = $UserGroupRepository->find($groupId);
+            if(!$group)
+            {
+              echo "erreur !";
+            }
+            $em->remove($group); //le supprime de la table
+            
+        }
+        $em->flush(); //valide la suppression
+        
+        
+        //recuperation des donnees de l'utilisateur pour le renvoyer a la vue
+          $qb=$em->createQueryBuilder(); 
+          $qb->select('u')
+            ->from('Entity\User', 'u')
+            ->where('u.username =:username')
+            ->setParameter('username', $username)
+            ->setMaxResults(1);
+          $query = $qb->getQuery();
+          $user = $query->getOneOrNullResult();
+        
+        
+        
+        echo $this->twig->render('userPage.twig',['username' =>$username, 'user' =>$user]);
+        
     }
     
     public function groupDetail($params) // récupère l'id du groupe et renvoi les adresses RSS correspondant
@@ -78,29 +133,23 @@ class UserGroupController extends Controller
         foreach ($group->getFeeds() as $feed){
             $addressRss = $feed->getFeedRSS();
             
-            $rss = simplexml_load_file($addressRss); //Convertit le fichier RSS (en XML) en objet
+            $rss = simplexml_load_file($addressRss); //Convertit le fichier RSS (XML) en objet
             //var_dump($rss);die;
             
             
             foreach ($rss->channel as $value){
-                $titleRss = (string) $value->title;
-                //var_dump($titleRss);
-                $rssArray[]=["titleChannel"=> $titleRss];
                 foreach ($rss->channel->item as $item) {
         		    $title  	 = (string) $item->title; // Title
         		    $link   	 = (string) $item->link; // Url Link
         		    $description = (string) $item->description; //Description
-        		    $rssArray[] = [ "titleChannel"=> $titleRss,
-        		                    "item"=>[
-                		                    "title" => $title,
-                		                    "link" => $link,
-                		                    "description" =>$description
-            		                        ],
+        		    $rssArray[] = [  "title" => $title,
+                		             "link" => $link,
+                		             "description" =>$description
         		                   ];
                 }
             }
         }
-        echo $this->twig->render('userGroup.twig', ['name' =>$name, 'rssArray' =>$rssArray]);
+        echo $this->twig->render('userGroup.twig', ['idGroup' =>$idGroup ,'name' =>$name, 'rssArray' =>$rssArray]);
     }
     
 }

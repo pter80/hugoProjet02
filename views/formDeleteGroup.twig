@@ -1,0 +1,29 @@
+{% block stylesheet %}
+
+    <link type="text/css"  href="views/forms.css" rel="stylesheet" >
+{% endblock %}
+
+{% block script %}
+    <script src="https://kit.fontawesome.com/2a2e68ce16.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block body %}
+    
+ <div class="iconBack">
+        <a href="?c=userGroup&t=openSession"><i class="fa-solid fa-xmark"></i></a>
+    </div>
+    <form action="?c=userGroup&t=deleteGroup" method="POST">
+        <h1>SUPPRESSION GROUPE</h1>
+        <div class="icon">
+            <i class="fa-solid fa-trash-can"></i>
+        </div>
+        <div>
+            {% for group in user.getUserGroups %}
+                    {{ group.getName }}<input type="checkbox" id="{{ group.getId }}" name=" {{ group.getName }}" value="{{ group.getId }}" >
+            {% endfor %}
+             <button type="submit"><strong>DELETE</strong></button>
+        </div>
+    </form>
+
+     
+{% endblock %}

@@ -16,18 +16,25 @@ class Feed
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer", nullable=false, unique=false)
+     * @ORM\Column(name="id", type="integer", nullable=false, unique=true)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
+    
     /**
      * @var string
      *
      * @ORM\Column(name="feedRSS", type="text", length=65535,nullable=true)
      */
     private $feedRSS;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=100, nullable=false, unique=false)
+     */
+    private $title;
     
     /**
      * @ORM\ManyToOne(targetEntity="UserGroup", inversedBy="feeds")
@@ -45,6 +52,29 @@ class Feed
         return $this->id;
     }
 
+    /**
+     * Set feedRSS.
+     *
+     * @param string|null $feedRSS
+     *
+     * @return Feed
+     */
+    public function setFeedRSS($feedRSS = null)
+    {
+        $this->feedRSS = $feedRSS;
+
+        return $this;
+    }
+
+    /**
+     * Get feedRSS.
+     *
+     * @return string|null
+     */
+    public function getFeedRSS()
+    {
+        return $this->feedRSS;
+    }
 
     /**
      * Set group.
@@ -71,26 +101,26 @@ class Feed
     }
 
     /**
-     * Set feedRSS.
+     * Set title.
      *
-     * @param string|null $feedRSS
+     * @param string $title
      *
      * @return Feed
      */
-    public function setFeedRSS($feedRSS = null)
+    public function setTitle($title)
     {
-        $this->feedRSS = $feedRSS;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get feedRSS.
+     * Get title.
      *
-     * @return string|null
+     * @return string
      */
-    public function getFeedRSS()
+    public function getTitle()
     {
-        return $this->feedRSS;
+        return $this->title;
     }
 }

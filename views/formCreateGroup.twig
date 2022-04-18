@@ -14,6 +14,9 @@
     </div>
     <form action="?c=userGroup&t=add" method="POST">
         <h1>CREATION GROUPE</h1>
+        {% if alertCreateGroup  == true %}   <!-- Si le compte existe déja  -->
+            <p class=alert>le nom du groupe existe déjà !</p>
+        {% endif %}
         <div class="formcontainer">
             <label><span>Nom du groupe :</span></label>
             <input type="text" placeholder="nom du groupe" name="name" required>
