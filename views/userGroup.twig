@@ -12,42 +12,43 @@
 {% endblock %}
 
 {% block body %}
-
-    <h1> {{ name }} </h1>
-    <form  action="?c=feed&t=create" method="post">
-        <input type="hidden" name="idGroup" value={{ idGroup }}>
-        <button type="submit" name="Add">Add</button>
-    </form>
-    <form  action="?c=feed&t=formDelete" method="post">
-        <input type="hidden" name="idGroup" value={{ idGroup }}>
-        <button type="submit" name="Add">del🗑</button>
-    </form>
-    <div class="list">
-        <!-- liste des flux -->
-        {% for value in rssArray %}
-            <div class="card">
-                <a href="{{ value.link }}" target="_blank">
-                    <!-- Icone -->
-                    <div class="icon">
-                        <i class="fa-solid fa-newspaper"></i>
-                    </div>
-                    
-                    <!-- Corp de notre carte -->
-                    <div class="card-body">
-                        <!-- Titre de l'article -->
-                        <div class="card-title">
-                            <h3>{{ value.title }}</h3>
+    <div class="blockBody">
+        <h1> {{ name }} </h1>
+        <form  action="?c=feed&t=create" method="post">
+            <input type="hidden" name="idGroup" value={{ idGroup }}>
+            <button type="submit" class="button" name="Add">Add</button>
+        </form>
+        <form  action="?c=feed&t=formDelete" method="post">
+            <input type="hidden" name="idGroup" value={{ idGroup }}>
+            <button type="submit" class="button" name="Add">del🗑</button>
+        </form>
+        <div class="list">
+            <!-- liste des flux -->
+            {% for value in rssArray %}
+                <div class="card">
+                    <a href="{{ value.link }}" target="_blank">
+                        <!-- Icone -->
+                        <div class="icon">
+                            <i class="fa-solid fa-newspaper"></i>
                         </div>
                         
-                        <!-- Description de l'article -->
-                        <div class="card-excerpt">
-                            <h3>Description :</h3>
-                            <p>{{ value.description }}</p>
+                        <!-- Corp de notre carte -->
+                        <div class="card-body">
+                            <!-- Titre de l'article -->
+                            <div class="card-title">
+                                <h3>{{ value.title }}</h3>
+                            </div>
+                            
+                            <!-- Description de l'article -->
+                            <div class="card-description">
+                                <h3>Description :</h3>
+                                <p>{{ value.description }}</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-                    
-        {% endfor %}
-    </div> 
+                    </a>
+                </div>
+                        
+            {% endfor %}
+        </div> 
+    </div>
 {% endblock %}

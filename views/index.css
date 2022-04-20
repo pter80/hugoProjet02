@@ -1,6 +1,33 @@
-.user{
-    background-color:grey;
-    top: 50%;
-    left: 50%;
-    padding: 110px;
+
+/* -- Header -- */
+header{
+    margin-top: 150px;
+    text-align: center;
 }
+header h1{
+   font-size: 60px;
+   padding-top: 5px;
+   color:#31525B;
+}
+
+header span{
+    color:#31525B;
+}
+
+#logo{
+    font-size: 80px;
+}
+header .start{
+    background-color:#31525B;
+    padding: 13px 20px;
+    font-size: 25px;
+    color: #fff;
+    cursor: pointer;
+    border:none;
+    outline: none;
+    border-radius: 10px;
+
+}
+
+/* -- Fin Header -- */
+

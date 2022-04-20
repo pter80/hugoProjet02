@@ -1,71 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 body{
-  margin:0px;
-  padding: 0px;
-  font-family: 'Open Sans', sans-serif;
-  background-color:#f1f1f1;
-  
+    font-family: 'Lato', sans-serif;
+    background-color:#f1f1f1;
+    padding: 0;
+    margin: 0;
+    flex: 1 0 auto;
 }
-
 body .page{
     margin: 20px 80px;
-    
-    
 }
 
-/* Barre de navigation */
-
+/* -- Barre de navigation -- */
 nav{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content: space-between;
-  padding: 20px;
-  background-color:#475B5A;
-  position: sticky;
-  top: 0;
-  color : #f1f1f1;
+    display: flex; /* Aligner les éléments*/
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background-color: #31525B;
+    padding: 20px  0px;
+
 }
-nav h1{
-  font-size: 20px;
-}
+
 nav .onglets{
-  display: flex;
-  flex-wrap:wrap;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px; /* pour être aligner au boutton */
 }
+
 nav .onglets a{
-  font-size: 17px;
-  margin-right: 10px;
-  cursor:pointer;
-}
-/* Fin de la barre de navigation */
-
-
-.page{
-    height : 450px;
+  
+    margin: 0px 20px; /* écart entre les <a> */
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px; 
 }
 
+nav .buttons a{
+    padding: 13px 20px;
+    border:none;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+}
+
+nav .buttons .home{
+    background-color: inherit;
+    margin-right: 10px;
+    color: #fff;
+    
+}
 
 
-/* Pied de page */
-footer {
-  margin-top: 100px;
-  background-color: #000;
-  padding: 30px;
-  color: #fff;
-  display: flex;
-  flex-wrap:wrap;
-  justify-content: space-between;
-}
-footer .social-media{
-  display: flex;
-}
-footer .social-media p{
-  margin-right: 15px;
-  /*padding: 5px;*/
-  text-align:center;
-  width: 20px;
-  cursor:pointer;
-  font-size:20px;
-}
-/* Fin du pied de page */
+/* -- Fin de la barre de navigation  -- */

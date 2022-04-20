@@ -1,3 +1,12 @@
+.blockBody{
+  margin:20px;
+}
+
+.list{
+  display:flex;
+  overflow-x: auto;
+}
+
 .card{
   width: 400px;
   margin: 10px 10px;
@@ -8,7 +17,7 @@
 .icon{
   font-size: 100px;
   transition: transform 0.25s;
-  padding-top: 5px;
+  padding: 5px 100px;
   /* Centrer horiz. icon*/
   margin-left: auto;
   margin-right: auto;
@@ -31,7 +40,23 @@
   color: black;
 }
 
-.card-excerpt{
+.card-description{
   height: 150px;
   overflow-y: scroll;
+}
+
+.card-description p{
+  margin:2px;
+}
+
+.button {
+  background-color: #31525B;  /* #7D8E95 */
+    color: white;
+    padding: 14px 0px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    text-align:center;
+    border-radius: 10px;
 }

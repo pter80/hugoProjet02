@@ -7,19 +7,21 @@
 
 
 {% block body %}
+    
     {% if connectUser  == true %}   <!-- Si le compte existe déja  -->
-        
-        <h1>Tableau de bord</h1>
-        <a href="?c=user&t=openSession"> Votre espace</a>
-        <a href="?c=user&t=closeSession"> Deconnexion</a>
-        
+        <header>
+            <h1>Tableau de bord</h1>
+                <button class="start" onclick="window.location.href='?c=user&t=openSession';"> Votre espace</button>
+                <button class="start" onclick="window.location.href='?c=user&t=closeSession';"> Deconnexion</button>
+        </header>
         
         {% else %}
-        <div class="user">
-        <a href="?c=user&t=create"> Account</a>
-        <a href="?c=user&t=login"> Login</a>
-        </div>
-    
+        <header>
+            <h1> Connectez-vous !</h1>
+            <button class="start" onclick="window.location.href='?c=user&t=create';"> Account</button>
+            <button class="start" onclick="window.location.href='?c=user&t=login';"> Login</button>
+            <h2><span>MyFeed</span> l'outil idéal pour votre veille !</h2>
+        </header>
      {% endif %}
 {% endblock %}
 

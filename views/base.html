@@ -1,7 +1,3 @@
-{% block php %}
-
-{% endblock %}
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,34 +13,25 @@
         <title>{% block title %} Home {% endblock %}</title>
     </head> 
     <body>
-        <!-- Barre de navigation -->
+       <!-- Barre de navigation-->
         <nav>
-        <h1>NomSite</h1>
-        <div class="onglets">
-          <a class="link" href="?c=index&t=index">Home</a>
-        </div>
-      </nav>
-  <!-- Fin de la barre de navigation -->
-       <section class="page"> 
-          
-          
-        {% block body %}
-        
-
-        {% endblock %}
-       </section> 
-    <!-- Pied de page -->
-        <footer>
-            <p>&copy; VILACA Hugo</p>
-            <div class="social-media">
-              <p><i class="fa-brands fa-twitter"></i></p>
-              <p><i class="fa-brands fa-instagram"></i></p>
-              <p><i class="fa-brands fa-facebook"></i></p>
-              <p><i class="fa-brands fa-reddit"></i></p>
+            <div class="onglets">
+                <a href="?c=index&t=index">MyFeed</a>
             </div>
-      </footer>
-  <!-- Fin du pied de page -->
-  
+            <div class="buttons">
+                <a href="?c=index&t=index" class="home">HOME</a>
+            </div>
+        </nav>
+        <!-- Fin barre de navigation -->
+        <section class="page"> 
+          
+            {% block body %}
+            
+    
+            {% endblock %}
+
+       </section>
+    
   {% block script %}
             <script src="https://kit.fontawesome.com/2a2e68ce16.js" crossorigin="anonymous"></script>
   {% endblock %}
