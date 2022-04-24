@@ -11,17 +11,33 @@
     <script src="https://kit.fontawesome.com/2a2e68ce16.js" crossorigin="anonymous"></script>
 {% endblock %}
 
-{% block body %}
+{% block body %} <!-- Affiche les flux dans un groupe  -->
     <div class="blockBody">
-        <h1> {{ name }} </h1>
-        <form  action="?c=feed&t=create" method="post">
-            <input type="hidden" name="idGroup" value={{ idGroup }}>
-            <button type="submit" class="button" name="Add">Add</button>
-        </form>
-        <form  action="?c=feed&t=formDelete" method="post">
-            <input type="hidden" name="idGroup" value={{ idGroup }}>
-            <button type="submit" class="button" name="Add">del🗑</button>
-        </form>
+        <div class="title">
+            <form action="?c=user&t=openSession" method="post">
+              <button id="backBtn" class="button"><i class="fa-solid fa-arrow-left"></i></button>
+            </form>
+            <h1> {{ name }} </h1>
+        </div>
+        <div class="control">
+            <h2>Gérer vos flux :</h2>
+            <form  action="?c=feed&t=create" method="post">
+                <input type="hidden" name="idGroup" value={{ idGroup }}>
+                <button type="submit" class="button" name="Add"><i class="fa-solid fa-plus"></i></button>
+            </form>
+            <form  action="?c=feed&t=formDelete" method="post">
+                <input type="hidden" name="idGroup" value={{ idGroup }}>
+                <button type="submit" class="button" name="Add"><i class="fa-solid fa-trash"></i></button>
+            </form>
+        </div>
+        <div class="titleFeed">
+            <form id="formBtnFeed" action="?c=feed&t=feedDetail" method="post">
+            {% for feed in group.getFeeds %}
+                <input type="hidden" name="idGroup" value={{ idGroup }}>
+                <button type="submit" class="button" id="btnFeed" name="idFeed" value={{ feed.getId }}>{{ feed.getTitle }}</button>
+            {% endfor %}
+            </form>
+        </div>
         <div class="list">
             <!-- liste des flux -->
             {% for value in rssArray %}
@@ -42,7 +58,7 @@
                             <!-- Description de l'article -->
                             <div class="card-description">
                                 <h3>Description :</h3>
-                                <p>{{ value.description }}</p>
+                                <p>{{ value.description |raw }}</p>
                             </div>
                         </div>
                     </a>

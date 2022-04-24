@@ -149,7 +149,7 @@ class UserGroupController extends Controller
                 }
             }
         }
-        echo $this->twig->render('userGroup.twig', ['idGroup' =>$idGroup ,'name' =>$name, 'rssArray' =>$rssArray]);
+        echo $this->twig->render('userGroup.twig', ['idGroup' =>$idGroup ,'name' =>$name, 'rssArray' =>$rssArray, 'group' =>$group]);
     }
     
 }

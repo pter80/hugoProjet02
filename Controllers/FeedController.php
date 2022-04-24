@@ -154,8 +154,42 @@ class FeedController extends Controller
   }
   
   
-  public function feedDetail(){
-    var_dump($_POST);die;
+  public function feedDetail($params){ // affiche les articles d'un flux en particulier
+    $em=$params["em"];
+    $idFeed = $_POST["idFeed"];
+    $idGroup = $_POST["idGroup"];
+    //recherche dans la table Feed l'enregistrement par son Id
+    $groupRepository = $em->getRepository('Entity\Feed');
+    $feed = $groupRepository->find($idFeed);
+    if(!$feed)
+    {
+      echo "erreur !";
+    }
+  
+    $addressRss = $feed->getFeedRSS();
+    
+    $titleFeed = $feed->getTitle();
+    $rssArray = array(); //tableau qui va contenir tous les elements
+    
+    
+    $rss = simplexml_load_file($addressRss); //Convertit le fichier RSS (XML) en objet
+    
+    foreach ($rss->channel as $value){
+        foreach ($rss->channel->item as $item) {
+		    $title  	 = (string) $item->title; // Title
+		    $link   	 = (string) $item->link; // Url Link
+		    $description = (string) $item->description; //Description
+		    $rssArray[] = [  "title" => $title,
+        		             "link" => $link,
+        		             "description" =>$description
+		                   ];
+        }
+    }
+    
+    //var_dump($rssArray);die;
+     
+    echo $this->twig->render('feed.twig', ['idGroup' =>$idGroup ,'titleFeed' =>$titleFeed, 'rssArray' =>$rssArray]);
+    
   }
   
 }

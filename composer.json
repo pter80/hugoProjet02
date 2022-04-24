@@ -15,7 +15,8 @@
         "symfony/yaml": "*",
         "doctrine/orm": "*",
         "doctrine/dbal": "^3.1.1",
-        "doctrine/annotations": "*"
+        "doctrine/annotations": "*",
+        "phpunit/phpunit": "^9.5"
     },
     "config": {
         "allow-plugins": {

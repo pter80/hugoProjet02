@@ -7,14 +7,14 @@
     <script src="https://kit.fontawesome.com/2a2e68ce16.js" crossorigin="anonymous"></script>
 {% endblock %}
 
-{% block body %}
+{% block body %} <!-- affiche le formulaire de création de groupe -->
     
  <div class="iconBack">
         <a href="?c=user&t=openSession"><i class="fa-solid fa-xmark"></i></a>
     </div>
     <form action="?c=userGroup&t=add" method="POST">
         <h1>CREATION GROUPE</h1>
-        {% if alertCreateGroup  == true %}   <!-- Si le compte existe déja  -->
+        {% if alertCreateGroup  == true %}   <!-- Si le nom du groupe existe déja  -->
             <p class=alert>le nom du groupe existe déjà !</p>
         {% endif %}
         <div class="formcontainer">

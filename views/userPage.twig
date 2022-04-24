@@ -8,20 +8,25 @@
 {% endblock %}
 
 {% block script %}
-
+    <script src="https://kit.fontawesome.com/2a2e68ce16.js" crossorigin="anonymous"></script>
 {% endblock %}
 
-{% block body %}
 
-    <h1>Bonjour {{ username}} </h1>
-    <a href="?c=user&t=closeSession"> Deconnexion</a>
-    
-    <form action="?c=userGroup&t=groupDetail" method="post"> 
-        {% for group in user.getUserGroups %}
-            <button name="idGroup" value={{ group.getId }}>{{ group.getName }}</button>
-        {% endfor %}
-    </form>
-    <a href="?c=userGroup&t=create">Ajouter</a>
-    <a href="?c=userGroup&t=formDelete">️Supprimer</a>
-     
+{% block body %} <!-- Affiche la liste des groupes de l'utilisateur -->
+    <header>
+        <div class="button">
+            <h1>Bonjour {{ username}} </h1>
+            <a href="?c=user&t=closeSession"> <i class="fa-solid fa-right-from-bracket"></i> Deconnexion </a>
+        </div>
+        <h2>Vos Groupes :</h2>
+        <div class="group">
+        <form action="?c=userGroup&t=groupDetail" method="post"> 
+            {% for group in user.getUserGroups %}
+                <button name="idGroup" value={{ group.getId }}>{{ group.getName }}</button>
+            {% endfor %}
+        </form>
+        <a id="add" href="?c=userGroup&t=create" title="Créer un groupe"><i class="fa-solid fa-plus"></i></a>
+        <a id="del" href="?c=userGroup&t=formDelete" title="Supprimer un groupe"><i class="fa-solid fa-trash"></i></a>
+        </div>
+    </header>
 {% endblock %}

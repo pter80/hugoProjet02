@@ -10,7 +10,7 @@
 
 
 
-{% block body %}
+{% block body %}  <!-- affiche le formulaire de connexion -->
     <div class="iconBack">
         <a href="?c=index&t=index"><i class="fa-solid fa-xmark"></i></a>
     </div>
@@ -29,9 +29,8 @@
             <input type="password" placeholder="Entrer votre mot de passe" name="password" required>
             <button type="submit"><strong>LOGIN</strong></button>
         </div>
+        <a class="createAccount" href="?c=user&t=create">Je n'ai pas de compte, je m'en crée un</a>
     </form>
     
-    
-     
  {% endblock %}
  

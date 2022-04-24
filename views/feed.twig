@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link type="text/css"  href="views/userGroup.css" rel="stylesheet" >
+    
+{% endblock %}
+
+{% block script %}
+    <script src="https://kit.fontawesome.com/2a2e68ce16.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block body %} <!-- affiche les articles d'un fluxRSS -->
+    <div class="title">
+        <form action="?c=userGroup&t=groupDetail" method="post">
+          <input type="hidden" name="idGroup" value={{ idGroup }}>
+          <button id="backBtn" class="button"><i class="fa-solid fa-arrow-left"></i></button>
+        </form>
+         <h1>{{ titleFeed }}</h1>
+    </div>
+   
+    <div class="list">
+        <!-- liste des flux -->
+        {% for value in rssArray %}
+            <div class="card">
+                <a href="{{ value.link }}" target="_blank">
+                    <!-- Icone -->
+                    <div class="icon">
+                        <i class="fa-solid fa-newspaper"></i>
+                    </div>
+                    
+                    <!-- Corp de notre carte -->
+                    <div class="card-body">
+                        <!-- Titre de l'article -->
+                        <div class="card-title">
+                            <h3>{{ value.title }}</h3>
+                        </div>
+                        
+                        <!-- Description de l'article -->
+                        <div class="card-description">
+                            <h3>Description :</h3>
+                            <p>{{ value.description |raw }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+                    
+        {% endfor %}
+    </div> 
+
+{% endblock %}

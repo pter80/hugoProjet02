@@ -90,3 +90,7 @@ button:hover {
     color: red;
     font-weight: bold;
 }
+
+.createAccount{
+    margin-left: 28%;
+}

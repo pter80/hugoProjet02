@@ -7,14 +7,14 @@ class UserController extends Controller
 
 {
   
-  public function create()
+  public function create() //renvoi au formulaire de creation de compte utilisateur
   {
       echo $this->twig->render('formAccount.twig', []);
   
   }
 
 
-  public function add($params)
+  public function add($params)//recuperation donnees du formulaire d'ajout de compte et crée l'utilisateur dans la table User
   {
       $em=$params["em"];
       
@@ -55,21 +55,16 @@ class UserController extends Controller
 	        echo $this->twig->render('index.html',[]);
 	        
       }
-      
-      //faire la fonction de hash
-      
-        
-      ///////////////////////////////////////////////////////////////
   }
   
-  public function login(){
+  public function login(){//renvoi au formulaire de connexion a un compte utilisateur
     
     echo $this->twig->render('formLogin.twig', []);
     
   }
 
 
-  public function openSession($params)
+  public function openSession($params)//recupere les elements du formulaire de connexion et traite la demande
   {
     $em=$params["em"];
     if (isset($_SESSION['username'])) {  //Si une session utilisateur existe déja
@@ -92,7 +87,6 @@ class UserController extends Controller
     else { //Sinon crée la Session
       
       //récupère les données du formulaire
-      //$em=$params["em"];
       $username = $_POST["username"];
       $password = $_POST["password"];
       
@@ -136,13 +130,13 @@ class UserController extends Controller
     
   }
   
-  public function closeSession()
+  public function closeSession()//deconnexion d'un compte utilisateur
   {
     
     //var_dump($_SESSION["username"]);
     unset($_SESSION['username']);
     //var_dump($_SESSION);
-    echo $this->twig->render('disconnect.twig',[]);  
+    echo $this->twig->render('index.html',[]);  
   }
   
 }

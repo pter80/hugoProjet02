@@ -1,0 +1,67 @@
+/* -- Header -- */
+header{
+    margin-top: 150px;
+    text-align: center;
+}
+header h1{
+   font-size: 60px;
+   padding-top: 5px;
+   color:#31525B;
+}
+
+header .button a{
+    background-color:#31525B;
+    padding: 13px 20px;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    border:none;
+    outline: none;
+    border-radius: 10px;
+    text-decoration:none;
+}
+header button{
+    margin:10px 5px;
+}
+
+header h2{
+    margin-top:30px;
+}
+
+.group{
+    display:flex;
+    justify-content: center;
+}
+
+.group a{
+    margin:5px 5px;
+    text-decoration:none;
+    padding: 13px 2px;
+    color: #31525B;
+    font-size: 40px;
+    transition: transform 0.25s;
+}
+.group #add:hover{
+    transform:scale(1.20);
+    color :green;
+}
+
+.group #del:hover{
+    transform:scale(1.20);
+    color :red;
+}
+
+.group button {
+    padding: 13px 20px;
+    background-color:#31525B;
+    cursor: pointer;
+    border:none;
+    border-radius: 10px;
+    color: #fff;
+    transition: transform 0.25s;
+    font-size: 25px;
+}
+
+.group button:hover {
+    transform:scale(1.07);
+}
